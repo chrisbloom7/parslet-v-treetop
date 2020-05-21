@@ -1,5 +1,8 @@
 require "treetop"
 
+# Load our custom syntax node classes so the parser can use them
+require_relative "dotcom_types"
+
 class Parser
   # Find out what our base path is
   base_path = File.expand_path(File.dirname(__FILE__))
@@ -10,7 +13,6 @@ class Parser
   # parse a string
   Treetop.load(File.join(base_path, "dotcom_dsl.treetop"))
   @@parser = DotcomDslParser.new
-
 
   def self.parse(data)
     # Pass the data over to the parser instance
@@ -26,6 +28,10 @@ class Parser
   end
 end
 
-pp Parser.parse "keyword"
-pp Parser.parse "key words"
-pp Parser.parse '"phrase"'
+pp Parser.parse("keyword").parse
+pp Parser.parse("key words").parse
+pp Parser.parse('"phrase"').parse
+pp Parser.parse('key "phrase" words').parse
+pp Parser.parse("key \"ph\\\\ rase\\\"\" words").parse
+pp Parser.parse('field:value').parse
+pp Parser.parse('"field:value"').parse

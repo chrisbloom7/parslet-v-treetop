@@ -1,22 +1,30 @@
 grammar DotcomDsl
   rule query
-    (phrase / keyword)+
+    (qualifier / phrase / keyword)+ <ShallowParsedQuery>
   end
 
   rule phrase
-    '"' quoted_character+ '"' space
+    '"' quoted_character+ '"' space? <PhraseNode>
   end
 
   rule quoted_character
-    '\\"' / '\\\\' / [^"]
+    '\\"' / '\\\\' / [^"\\]
   end
 
   rule keyword
-    [a-zA-Z]+ space
+    [a-zA-Z]+ space? <TermNode>
   end
 
   rule space
-   [ \t]*
+   [ \t]+
+  end
+
+  rule qualifier
+    qualifier_field ":" (phrase / keyword) <QualifierNode>
+  end
+
+  rule qualifier_field
+    [a-zA-Z]+
   end
 end
 
