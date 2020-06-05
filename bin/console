@@ -1,6 +1,23 @@
 #!/usr/bin/env ruby
 
 require "irb"
-require_relative "../lib/dotcom"
+require_relative "../lib/parlset_test/parser"
+require_relative "../lib/treetop_test/parser"
 
 IRB.start
+
+# pp ParsletTest::Parser.parse("keyword")
+# pp ParsletTest::Parser.parse("key words")
+# pp ParsletTest::Parser.parse('"phrase"')
+# pp ParsletTest::Parser.parse('key "phrase" words')
+# pp ParsletTest::Parser.parse("key \"ph\\\\ rase\\\"\" words")
+# pp ParsletTest::Parser.parse('field:value')
+# pp ParsletTest::Parser.parse('"field:value"')
+
+# pp TreetopTest::Parser.parse("keyword").parse
+# pp TreetopTest::Parser.parse("key words").parse
+# pp TreetopTest::Parser.parse('"phrase"').parse
+# pp TreetopTest::Parser.parse('key "phrase" words').parse
+# pp TreetopTest::Parser.parse("key \"ph\\\\ rase\\\"\" words").parse
+# pp TreetopTest::Parser.parse('field:value').parse
+# pp TreetopTest::Parser.parse('"field:value"').parse
