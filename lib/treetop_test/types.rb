@@ -22,6 +22,7 @@ module TreetopTest
           field: :default,
           value: text_value.strip,
           negation: false,
+          phrase: false,
         }
       end
     end
@@ -35,10 +36,9 @@ module TreetopTest
           field: :default,
           value: phrase,
           negation: false,
+          phrase: true,
         }
       end
     end
   end
 end
-
-# pos:1, field:default, value:A, negation:false, phrase:false

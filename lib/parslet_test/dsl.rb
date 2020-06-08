@@ -34,7 +34,6 @@ module ParsletTest
   class Transformer < Parslet::Transform
     rule(qualifier: { field: simple(:field), keyword: simple(:term) }) do
       {
-        pos: field.offset,
         field: field.to_sym,
         value: term.to_s,
         negation: false,
@@ -45,7 +44,6 @@ module ParsletTest
     rule(qualifier: { field: simple(:field), phrase: simple(:term) }) do
       phrase = term.to_s.gsub(/\\\"/, "\"").gsub(/\\\\/, "\\")
       {
-        pos: field.offset,
         field: field.to_sym,
         value: phrase,
         negation: false,
@@ -55,7 +53,6 @@ module ParsletTest
 
     rule(keyword: simple(:term)) do
       {
-        pos: term.offset,
         field: :default,
         value: term.to_s,
         negation: false,
@@ -67,7 +64,6 @@ module ParsletTest
       offset = term.offset
       phrase = term.to_s.gsub(/\\\"/, "\"").gsub(/\\\\/, "\\")
       {
-        pos: offset,
         field: :default,
         value: phrase,
         negation: false,
