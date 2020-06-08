@@ -14,17 +14,17 @@ queries = {
   xxlarge: "AAAAA \"BBBBB CCCCC\" DDDDD:EEEEE FFFFF:\"GGGGG\" HHHHH IIIIIjjjjjkkkkk:LLLLLmmmmmnnnnn \"oooooppppp:\" \":qqqqqrrrrr\" SSSSTTTTTUUUUU \"VVVVV\\\"WWWWW\" XXXXXYYYYYZZZZZ",
   bad: "",
 }
-n = 5_000
+n = 90
 
 def parse_parslet(data, rescuable = false)
-  ParsletTest::Parser.parse(data)
+  ParsletTest::Parser.parse(data).parse
 rescue Exception
   raise unless rescuable
   nil
 end
 
 def parse_treetop(data, rescuable = false)
-  TreetopTest::Parser.parse(data)
+  TreetopTest::Parser.parse(data).parse
 rescue Exception
   raise unless rescuable
   nil

@@ -61,3 +61,7 @@ Run `bin/setup` to install the dependencies. Use `bundle exec rake` to run the t
 ## Benchmarking
 
 Run `bin/benchmark` to run a set of benchmark tests for varying length strings against both grammar parsers. Output will be reported to STDOUT.
+
+## Conclusions
+
+I'll leave it up to you to draw your own conclusions from the benchmark data, based on whatever criteria the project you're considering them for requires.
