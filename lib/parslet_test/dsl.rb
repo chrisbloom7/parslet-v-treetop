@@ -31,7 +31,7 @@ module ParsletTest
     root :query
   end
 
-  class DotcomTransformer < Parslet::Transform
+  class Transformer < Parslet::Transform
     rule(qualifier: { field: simple(:field), keyword: simple(:term) }) do
       {
         pos: field.offset,

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler/setup'
-require_relative '../lib/parlset_test/parser'
+require_relative '../lib/parslet_test/parser'
 require_relative '../lib/treetop_test/parser'
 
 # (If you use this, don't forget to add pry to your Gemfile!)
