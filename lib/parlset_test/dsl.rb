@@ -1,7 +1,7 @@
 require "parslet"
 
 module ParsletTest
-  class DotcomDsl < Parslet::Parser
+  class Dsl < Parslet::Parser
     rule(:quoted_character) { str('\\"') | str('\\\\') | match['^"\\\\'] }
     rule(:space) { match[' \t'].repeat(1) }
     rule(:keyword) do

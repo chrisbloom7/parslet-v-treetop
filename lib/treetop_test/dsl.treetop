@@ -1,5 +1,5 @@
 module TreetopTest
-  grammar DotcomDsl
+  grammar Dsl
     rule query
       (qualifier / phrase / keyword)+ <ShallowParsedQuery>
     end
@@ -29,8 +29,3 @@ module TreetopTest
     end
   end
 end
-
-# - 2 directions
-#
-# 1. Build structure up
-# 2. This is currently a linter that gives us a tree, but we ultimately need a parsed representation (simple parse structure) which can probably be done using Syntax-Oriented Programming to make sense of these nodes and act on them

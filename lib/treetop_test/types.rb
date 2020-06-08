@@ -1,7 +1,7 @@
 require "byebug"
 
 module TreetopTest
-  module DotcomDsl
+  module Dsl
     class ShallowParsedQuery < Treetop::Runtime::SyntaxNode
       def parse
         return self.elements.map { |x| x.parse }

@@ -37,6 +37,8 @@ There are plenty of example projects for Parslet, including several articles and
 - Lots of prior art we can reference
 - It's a popular repository (709 stars, 85 forks, as of 2020-06-04)
 - Multiple contributors
+- The grammar file is Ruby, which can be very powerful.
+- Uses a simple DSL
 
 ### Cons
 

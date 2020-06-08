@@ -1,7 +1,7 @@
 require "treetop"
 
 # Load our custom syntax node classes so the parser can use them
-require_relative "dotcom_types"
+require_relative "types"
 
 module TreetopTest
   class Parser
@@ -12,8 +12,8 @@ module TreetopTest
     # create a new instance of that parser as a class variable
     # so we don't have to re-create it every time we need to
     # parse a string
-    Treetop.load(File.join(base_path, "dotcom_dsl.treetop"))
-    @@parser = DotcomDslParser.new
+    Treetop.load(File.join(base_path, "dsl.treetop"))
+    @@parser = DslParser.new
 
     def self.parse(data)
       # Pass the data over to the parser instance
