@@ -4,8 +4,8 @@ module ParsletTest
   class Parser
     def self.parse(data)
       Dsl::ShallowParsedQuery.new(Dsl.new.parse(data))
-    rescue Parslet::ParseFailed => failure
-      puts failure.parse_failure_cause.ascii_tree
+    rescue Parslet::ParseFailed => e
+      raise Exception, e.parse_failure_cause.ascii_tree
     end
   end
 

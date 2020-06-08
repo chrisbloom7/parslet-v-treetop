@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+
+require 'benchmark'
+require 'benchmark/ips'
+
+require_relative '../lib/parslet_test/parser'
+require_relative '../lib/treetop_test/parser'
+
+queries = {
+  small: "A",
+  medium: "AA \"BB CC\"",
+  large: "AAA \"BBB CCC\" DDD:EEE",
+  xlarge: "AAAA \"BBBB CCCC\" DDDD:EEEE FFFF:\"GGGG\" HHHH",
+  xxlarge: "AAAAA \"BBBBB CCCCC\" DDDDD:EEEEE FFFFF:\"GGGGG\" HHHHH IIIIIjjjjjkkkkk:LLLLLmmmmmnnnnn \"oooooppppp:\" \":qqqqqrrrrr\" SSSSTTTTTUUUUU \"VVVVV\\\"WWWWW\" XXXXXYYYYYZZZZZ",
+  bad: "",
+}
+n = 5_000
+
+def parse_parslet(data, rescuable = false)
+  ParsletTest::Parser.parse(data)
+rescue Exception
+  raise unless rescuable
+  nil
+end
+
+def parse_treetop(data, rescuable = false)
+  TreetopTest::Parser.parse(data)
+rescue Exception
+  raise unless rescuable
+  nil
+end
+
+queries.each do |name, query|
+  rescuable = name == :bad
+
+  puts "\n#{name.capitalize} Query (#{n} times)"
+  Benchmark.bmbm do |x|
+    x.report("Parslet") {n.times do; parse_parslet(query, rescuable); end}
+    x.report("Treetop") {n.times do; parse_treetop(query, rescuable); end}
+  end
+
+  puts "\n#{name.capitalize} Query IPS"
+  Benchmark.ips do |x|
+    x.report("Parslet") {parse_parslet(query, rescuable)}
+    x.report("Treetop") {parse_treetop(query, rescuable)}
+  end
+end
+
+# puts "\nMedium Query (#{n} times)"
+# Benchmark.bmbm do |x|
+#   x.report("Parslet") {n.times do; parse_parslet(medium_query); end}
+#   x.report("Treetop") {n.times do; parse_treetop(medium_query); end}
+# end
+
+# puts "\nLarge Query (#{n} times)"
+# Benchmark.bmbm do |x|
+#   x.report("Parslet") {n.times do; parse_parslet(large_query); end}
+#   x.report("Treetop") {n.times do; parse_treetop(large_query); end}
+# end
+
+# puts "\nX-Large Query (#{n} times)"
+# Benchmark.bmbm do |x|
+#   x.report("Parslet") {n.times do; parse_parslet(xlarge_query); end}
+#   x.report("Treetop") {n.times do; parse_treetop(xlarge_query); end}
+# end
+
+# puts "\nXX-Large Query (#{n} times)"
+# Benchmark.bmbm do |x|
+#   x.report("Parslet") {n.times do; parse_parslet(xxlarge_query); end}
+#   x.report("Treetop") {n.times do; parse_treetop(xxlarge_query); end}
+# end
+
+# puts "\nBad Query (#{n} times)"
+# Benchmark.bmbm do |x|
+#   x.report("Parslet") {n.times do; parse_parslet(bad_query); rescue Exception; nil; end}
+#   x.report("Treetop") {n.times do; parse_treetop(bad_query); rescue Exception; nil; end}
+# end
