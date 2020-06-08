@@ -53,3 +53,11 @@ All of the existing performance comparisons I could find were done around 2011 w
 - [parslet 1.4.0 vs. treetop · GitHub](https://gist.github.com/kschiess/2788349)
 
 This repo is intended to serve as a benchmarking and DSL comparison for a simple string parser implemented with Parslet 2.0 and Treetop 1.6.
+
+## Setup
+
+Run `bin/setup` to install the dependencies. Use `bundle exec rake` to run the test suite.
+
+## Benchmarking
+
+Run `bin/benchmark` to run a set of benchmark tests for varying length strings against both grammar parsers. Output will be reported to STDOUT.
