@@ -1,10 +1,15 @@
 #!/usr/bin/env ruby
 
-require "irb"
-require_relative "../lib/parlset_test/parser"
-require_relative "../lib/treetop_test/parser"
+require 'bundler/setup'
+require_relative '../lib/parlset_test/parser'
+require_relative '../lib/treetop_test/parser'
 
-IRB.start
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+require 'irb'
+IRB.start(__FILE__)
 
 # pp ParsletTest::Parser.parse("keyword")
 # pp ParsletTest::Parser.parse("key words")
